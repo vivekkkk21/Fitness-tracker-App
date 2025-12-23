@@ -65,11 +65,11 @@ body {
     opacity: 0.6;
 }
 .header {
-    font-size: 26px;
-    font-weight: 700;
+    font-size: 36px;
+    font-weight: 900;
 }
 .sub {
-    font-size: 14px;
+    font-size: 24px;
     color: #9ca3af;
 }
 </style>
