@@ -45,7 +45,7 @@
       { "name": "Flutter Kicks", "sets": 3, "reps": 15 },
       { "name": "Legs raises", "sets": 3, "reps": 15 },
       { "name": "Plank", "sets": 3, "reps": 1 }
-      { "name": "Treadmill Inclined walk 30`", "sets": 1, "reps": 30 }
+      { "name": "Treadmill Inclined walk 30", "sets": 1, "reps": 30 }
     ]
   },
   "Friday": {
@@ -67,9 +67,7 @@
       { "name": "Pullups", "sets": 3, "reps": 20 },
       { "name": "Burpes", "sets": 3, "reps": 12 },
       { "name": "Body weight squats", "sets": 3, "reps": 30 },
-      { "name": "Cycling", "sets": 3, "reps": 10 }
+      { "name": "Cycling", "sets": 1, "reps": 30 }
     ]
-  }
-  
-  
+  }  
 }
