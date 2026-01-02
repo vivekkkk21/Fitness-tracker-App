@@ -1,84 +1,73 @@
 {
   "Monday": {
-    "muscle_group": "Chest + Abs",
+    "muscle_group": "Chest + abs + Cardio",
     "exercises": [
-      { "name": "Flat Bench DB Press", "sets": 3, "reps": 12 },
+      { "name": "Flat Bench Press", "sets": 3, "reps": 12 },
       { "name": "Incline Dumbbell Press", "sets": 3, "reps": 12 },
       { "name": "Peck Fly", "sets": 3, "reps": 15 },
       { "name": "High to Low Cable", "sets": 3, "reps": 15 },
-      { "name": "Low to High Cable", "sets": 3, "reps": 15 },
-      { "name": "Half Crunches", "sets": 3, "reps": 15 },
       { "name": "Crunches (twisted)", "sets": 3, "reps": 15 },
-      { "name": "Flutter kicks", "sets": 3, "reps": 15 },
       { "name": "Knee tucks", "sets": 3, "reps": 15 },
-      { "name": "Planks", "sets": 3, "reps": 1 }
+      { "name": "Treadmill", "sets": 1, "reps": 30 }
     ]
   },
   "Tuesday": {
-    "muscle_group": "Back + Forearms",
+    "muscle_group": "Back + Forearms + Cardio",
     "exercises": [
       { "name": "Lat pulldown", "sets": 3, "reps": 15 },
       { "name": "T bar", "sets": 3, "reps": 12 },
       { "name": "Machine Rows", "sets": 3, "reps": 12 },
       { "name": "Deadlift", "sets": 3, "reps": 8 },
-      { "name": "Shrugs", "sets": 4, "reps": 8 },
       { "name": "Reverse barbell curl", "sets": 3, "reps": 10 },
       { "name": "wrist curls", "sets": 3, "reps": 15 },
-      { "name": "wrist rotation", "sets": 3, "reps": 15 },
-      { "name": "Hammer", "sets": 3, "reps": 10 }
+      { "name": "Treadmill", "sets": 1, "reps": 30 }
     ]
   },
   "Wednesday": {
-    "muscle_group": "Biceps + Legs",
+    "muscle_group": "Legs + Cardio",
     "exercises": [
-      { "name": "Barbel Curl (C+N+W)", "sets": 3, "reps": 6 },
-      { "name": "Superset curl", "sets": 3, "reps": 6 },
-      { "name": "Hammer", "sets": 3, "reps": 12 },
-      { "name": "Peacher Curl", "sets": 3, "reps": 12 },
-      { "name": "Normal squats", "sets": 1, "reps": 100 },
+      { "name": "Weighted Squats", "sets": 3, "reps": 12 },
+      { "name": "RDL", "sets": 3, "reps": 15 },
       { "name": "Leg Raises", "sets": 3, "reps": 12 },
       { "name": "Leg Press", "sets": 3, "reps": 12 },
-      { "name": "Calves", "sets": 1, "reps": 50 }
+      { "name": "Calves", "sets": 4, "reps": 15 },
+      { "name": "Cycling", "sets": 1, "reps": 30 }
     ]
   },
   "Thursday": {
-    "muscle_group": "Triceps + Abs",
+    "muscle_group": "Shoulders + Abs + Cardio",
     "exercises": [
-      { "name": "Triceps rows pressdown", "sets": 3, "reps": 15 },
-      { "name": "Undergrip pressdown", "sets": 3, "reps": 12 },
-      { "name": "kickback (Cable)", "sets": 3, "reps": 12 },
-      { "name": "Skull Crusher", "sets": 3, "reps": 12 },
-      { "name": "Crunches", "sets": 3, "reps": 15 },
-      { "name": "Knee Tucks", "sets": 3, "reps": 15 },
-      { "name": "Russian Twist", "sets": 3, "reps": 15 },
+      { "name": "Overhead Shoulder Press", "sets": 4, "reps": 10 },
+      { "name": "Lateral Raises", "sets": 3, "reps": 15 },
+      { "name": "Front delt raises", "sets": 3, "reps": 15 },
+      { "name": "Rear delt/deck fly", "sets": 3, "reps": 15 },
+      { "name": "Shrugs", "sets": 3, "reps": 15 },
       { "name": "Flutter Kicks", "sets": 3, "reps": 15 },
       { "name": "Legs raises", "sets": 3, "reps": 15 },
       { "name": "Plank", "sets": 3, "reps": 1 }
+      { "name": "Treadmill Inclined walk 30`", "sets": 1, "reps": 30 },
     ]
   },
   "Friday": {
-    "muscle_group": "Shoulder + Forearms",
+    "muscle_group": "Arms + Cardio",
     "exercises": [
-      { "name": "Seated Overhead DB Press", "sets": 3, "reps": 15 },
-      { "name": "Lateral Delt Raises", "sets": 3, "reps": 15 },
-      { "name": "Front Delt Raises", "sets": 3, "reps": 15 },
-      { "name": "Upright Rows", "sets": 3, "reps": 15 },
-      { "name": "Face pull", "sets": 3, "reps": 15 },
-      { "name": "Deck Fly", "sets": 3, "reps": 15 },
-      { "name": "Reverse Barbel Curl", "sets": 3, "reps": 15 },
-      { "name": "Wrist curl", "sets": 3, "reps": 15 },
-      { "name": "Wrist DB Rotation", "sets": 3, "reps": 1 }
+      { "name": "Barbell Curl (C+N+W)", "sets": 3, "reps": 12 },
+      { "name": "Hammer Curl", "sets": 3, "reps": 12 },
+      { "name": "Triceps Pushdown", "sets": 3, "reps": 12 },
+      { "name": "Overhead triceps extensions", "sets": 3, "reps": 10 },
+      { "name": "Dips", "sets": 3, "reps": 15 },
+      { "name": "HIIT (Treadmill/Cycle)", "sets": 3, "reps": 20 },
     ]
   },
   "Saturday": {
-    "muscle_group": "Legs",
+    "muscle_group": "Full Body",
     "exercises": [
-      { "name": "Weighted Squats", "sets": 3, "reps": 15 },
-      { "name": "Leg Raises", "sets": 3, "reps": 15 },
-      { "name": "Hamstrings", "sets": 3, "reps": 12 },
-      { "name": "Bulgarian Squats", "sets": 3, "reps": 15 },
-      { "name": "Smith Machine close squats", "sets": 3, "reps": 15 },
-      { "name": "Leg Press", "sets": 3, "reps": 10 }
+      { "name": "Deadlift", "sets": 3, "reps": 6 },
+      { "name": "Pushups", "sets": 3, "reps": 20 },
+      { "name": "Pullups", "sets": 3, "reps": 20 },
+      { "name": "Burpes", "sets": 3, "reps": 12 },
+      { "name": "Body weight squats", "sets": 3, "reps": 30 },
+      { "name": "Cycling", "sets": 3, "reps": 10 }
     ]
   }
   
