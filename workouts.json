@@ -44,7 +44,7 @@
       { "name": "Shrugs", "sets": 3, "reps": 15 },
       { "name": "Flutter Kicks", "sets": 3, "reps": 15 },
       { "name": "Legs raises", "sets": 3, "reps": 15 },
-      { "name": "Plank", "sets": 3, "reps": 1 }
+      { "name": "Plank", "sets": 3, "reps": 1 },
       { "name": "Treadmill Inclined walk 30", "sets": 1, "reps": 30 }
     ]
   },
