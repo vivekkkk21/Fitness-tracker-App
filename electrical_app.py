@@ -2,19 +2,17 @@ import streamlit as st
 import networkx as nx
 from pyvis.network import Network
 import tempfile
-import os
+import streamlit.components.v1 as components
 
-# -------------------------------
-# SIMPLE LOGIN DATA (DEMO ONLY)
-# -------------------------------
+st.set_page_config(layout="wide")
+
+# ---------------- LOGIN USERS ----------------
 USERS = {
     "admin": {"password": "admin123", "role": "admin"},
     "user": {"password": "user123", "role": "viewer"},
 }
 
-# -------------------------------
-# ELECTRICAL NETWORK DATA
-# -------------------------------
+# ---------------- NETWORK DATA ----------------
 NODES = {
     "TOB6": "TOB No. 6",
     "TOB9": "TOB No. 9",
@@ -48,133 +46,114 @@ EDGES = [
     ("UV1B", "SE1"), ("UV1B", "SE2"),
 ]
 
-# -------------------------------
-# BUILD GRAPH
-# -------------------------------
 G = nx.DiGraph()
 G.add_nodes_from(NODES.keys())
 G.add_edges_from(EDGES)
 
-# -------------------------------
-# LOGIN STATE
-# -------------------------------
+# ---------------- SESSION ----------------
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
     st.session_state.role = None
 
 
-# -------------------------------
-# LOGIN SCREEN
-# -------------------------------
-def login_screen():
-    st.title("🔌 Electrical Network Navigation – Demo Login")
+# ---------------- LOGIN SCREEN ----------------
+def login():
+    st.title("🔌 Electrical Network Login")
 
-    user_id = st.text_input("User ID")
-    password = st.text_input("Password", type="password")
+    uid = st.text_input("User ID")
+    pwd = st.text_input("Password", type="password")
 
     if st.button("Login"):
-        if user_id in USERS and USERS[user_id]["password"] == password:
+        if uid in USERS and USERS[uid]["password"] == pwd:
             st.session_state.logged_in = True
-            st.session_state.role = USERS[user_id]["role"]
-            st.success("Login successful")
+            st.session_state.role = USERS[uid]["role"]
             st.rerun()
         else:
             st.error("Invalid credentials")
 
 
-# -------------------------------
-# GRAPH UTILITIES
-# -------------------------------
-def get_upstream(node):
-    return nx.ancestors(G, node)
+# ---------------- GRAPH FUNCTIONS ----------------
+def upstream(node):
+    return list(nx.ancestors(G, node))
 
 
-def get_downstream(node):
-    return nx.descendants(G, node)
+def downstream(node):
+    return list(nx.descendants(G, node))
 
 
-def draw_graph(center_node=None, highlight_nodes=None):
-    net = Network(height="600px", directed=True)
+def draw_flowchart(center):
+    up = upstream(center)
+    down = downstream(center)
 
-    for node in G.nodes():
-        color = "#97C2FC"
+    net = Network(height="700px", directed=True, layout=False)
 
-        if highlight_nodes and node in highlight_nodes:
-            color = "red"
+    # ---- Add nodes with vertical levels ----
+    for u in up:
+        net.add_node(u, label=NODES[u], color="lightblue", level=0)
 
-        if node == center_node:
-            color = "orange"
+    net.add_node(center, label=NODES[center], color="orange", level=1)
 
-        net.add_node(node, label=NODES[node], color=color)
+    for d in down:
+        net.add_node(d, label=NODES[d], color="lightgreen", level=2)
 
-    for edge in G.edges():
-        net.add_edge(edge[0], edge[1])
+    # ---- Add edges only relevant to subtree ----
+    for a, b in EDGES:
+        if a in up + [center] and b in up + [center] + down:
+            net.add_edge(a, b)
 
-    tmp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".html")
-    net.save_graph(tmp_file.name)
+    # hierarchical top → bottom
+    net.set_options("""
+    var options = {
+      "layout": {
+        "hierarchical": {
+          "direction": "UD",
+          "sortMethod": "directed",
+          "levelSeparation": 120,
+          "nodeSpacing": 180
+        }
+      },
+      "physics": false
+    }
+    """)
 
-    with open(tmp_file.name, "r", encoding="utf-8") as f:
+    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".html")
+    net.save_graph(tmp.name)
+
+    with open(tmp.name, "r", encoding="utf-8") as f:
         html = f.read()
 
-    st.components.v1.html(html, height=600)
+    components.html(html, height=700)
 
 
-# -------------------------------
-# MAIN APP
-# -------------------------------
-def main_app():
-    st.title("⚡ Electrical Network Navigator")
-
-    st.sidebar.write(f"**Logged in as:** {st.session_state.role}")
+# ---------------- MAIN APP ----------------
+def app():
+    st.title("⚡ Electrical Load Flow Viewer")
 
     if st.sidebar.button("Logout"):
         st.session_state.logged_in = False
         st.rerun()
 
-    # SEARCH
+    # ---- Search bar ----
     selected_name = st.selectbox(
-        "Search Panel / Switch / Load",
-        options=list(NODES.values())
+        "Search Load / Panel",
+        list(NODES.values())
     )
 
     selected_node = [k for k, v in NODES.items() if v == selected_name][0]
 
     st.subheader(f"Selected: {selected_name}")
 
-    upstream = get_upstream(selected_node)
-    downstream = get_downstream(selected_node)
+    # ---- Draw vertical flowchart ----
+    draw_flowchart(selected_node)
 
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.write("### ⬆ Upstream to Source")
-        if upstream:
-            for u in upstream:
-                st.write("-", NODES[u])
-        else:
-            st.write("No upstream (Source node)")
-
-    with col2:
-        st.write("### ⬇ Downstream Impact")
-        if downstream:
-            for d in downstream:
-                st.write("-", NODES[d])
-        else:
-            st.write("No downstream (End load)")
-
-    # EMERGENCY IMPACT
-    if st.button("🚨 If this is turned OFF"):
-        st.warning("Affected downstream loads highlighted in RED")
-        draw_graph(center_node=selected_node, highlight_nodes=downstream)
-    else:
-        draw_graph(center_node=selected_node)
+    # ---- Emergency impact ----
+    if st.button("🚨 Show Downstream Impact"):
+        st.warning("Highlighted downstream loads affected")
+        st.write([NODES[d] for d in downstream(selected_node)])
 
 
-# -------------------------------
-# APP ROUTING
-# -------------------------------
+# ---------------- ROUTING ----------------
 if not st.session_state.logged_in:
-    login_screen()
+    login()
 else:
-    main_app()
-
+    app()
